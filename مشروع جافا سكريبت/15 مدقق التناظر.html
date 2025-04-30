@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>مدقق التناظر</title>
+    <style>
+        body { font-family: Arial, sans-serif; text-align: center; padding: 50px; background-color: #f4f4f4; }
+        input { padding: 10px; margin: 10px; width: 300px; }
+        button { padding: 10px 20px; cursor: pointer; }
+        .result { margin-top: 20px; font-size: 24px; }
+    </style>
+</head>
+<body>
+    <h1>مدقق التناظر</h1>
+    <input type="text" id="inputText" placeholder="أدخل كلمة أو عبارة...">
+    <button id="checkButton">تحقق</button>
+    <div class="result" id="result"></div>
+
+    <script>
+        document.getElementById('checkButton').addEventListener('click', () => {
+            const inputText = document.getElementById('inputText').value;
+            const cleanedText = inputText.replace(/[\W_]/g, '').toLowerCase(); // إزالة الأحرف غير المسموح بها وتحويل إلى أحرف صغيرة
+            const reversedText = cleanedText.split('').reverse().join('');
+
+            const resultMessage = (cleanedText === reversedText) 
+                ? 'هذه الكلمة أو العبارة متماثلة.'
+                : 'هذه الكلمة أو العبارة ليست متماثلة.';
+
+            document.getElementById('result').textContent = resultMessage;
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>حاسبة مؤشر كتلة الجسم</title>
+    <style>
+        body { font-family: Arial, sans-serif; text-align: center; padding: 50px; background-color: #f4f4f4; }
+        input { padding: 10px; margin: 10px; width: 200px; }
+        button { padding: 10px 20px; font-size: 16px; cursor: pointer; }
+        .result { margin-top: 20px; font-size: 24px; }
+    </style>
+</head>
+<body>
+    <h1>حاسبة مؤشر كتلة الجسم</h1>
+    <input type="number" id="weight" placeholder="الوزن (كيلوغرام)" required>
+    <input type="number" id="height" placeholder="الطول (متر)" required>
+    <button id="calculateButton">احسب</button>
+    <div class="result" id="result"></div>
+
+    <script>
+        const calculateButton = document.getElementById('calculateButton');
+        const resultDisplay = document.getElementById('result');
+
+        calculateButton.addEventListener('click', () => {
+            const weight = parseFloat(document.getElementById('weight').value);
+            const height = parseFloat(document.getElementById('height').value);
+
+            if (weight > 0 && height > 0) {
+                const bmi = weight / (height * height);
+                resultDisplay.textContent = `مؤشر كتلة الجسم: ${bmi.toFixed(2)}`;
+            } else {
+                resultDisplay.textContent = "يرجى إدخال قيم صحيحة.";
+            }
+        });
+    </script>
+</body>
+</html>

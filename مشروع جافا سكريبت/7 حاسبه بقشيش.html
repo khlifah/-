@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>حاسبة البقشيش</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background: #f4f4f4;
+        }
+        input, button {
+            padding: 10px;
+            margin: 5px;
+            font-size: 16px;
+        }
+        .result {
+            margin-top: 20px;
+            font-size: 18px;
+        }
+    </style>
+</head>
+<body>
+    <h1>حاسبة البقشيش</h1>
+    <input type="number" id="amount" placeholder="المبلغ الإجمالي" required>
+    <input type="number" id="tipPercentage" placeholder="نسبة البقشيش (%)" required>
+    <button id="calculate">احسب البقشيش</button>
+    <div class="result" id="result"></div>
+
+    <script>
+        document.getElementById('calculate').addEventListener('click', function() {
+            //parseFloat يحول النص إلى رقم عشري
+            const amount = parseFloat(document.getElementById('amount').value);
+            //نسبة البقشيش
+            const tipPercentage = parseFloat(document.getElementById('tipPercentage').value);
+            const tip = (amount * tipPercentage) / 100;
+            const total = amount + tip;
+
+            document.getElementById('result').innerHTML = 
+                `مقدار البقشيش: ${tip.toFixed(2)}<br>المجموع الكلي: ${total.toFixed(2)}`;
+        });
+    </script>
+</body>
+</html>

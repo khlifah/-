@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>رمي النرد</title>
+    <style>
+        body { font-family: Arial, sans-serif; text-align: center; padding: 50px; background-color: #f4f4f4; }
+        .result { font-size: 48px; margin: 20px 0; }
+        button { padding: 10px 20px; font-size: 16px; cursor: pointer; }
+    </style>
+</head>
+<body>
+    <h1>رمي النرد</h1>
+    <div class="result" id="result">اضغط على زر الرمي!</div>
+    <button id="rollButton">ارمِ النرد</button>
+
+    <script>
+        const resultDisplay = document.getElementById('result');
+        const rollButton = document.getElementById('rollButton');
+
+        rollButton.addEventListener('click', () => {
+            const randomNumber = Math.floor(Math.random() * 6) + 1; // رقم عشوائي من 1 إلى 6
+            resultDisplay.textContent = `نتيجة الرمي: ${randomNumber}`;
+        });
+    </script>
+</body>
+</html>

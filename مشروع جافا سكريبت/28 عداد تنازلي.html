@@ -1,0 +1,129 @@
+﻿<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>عداد تنازلي</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            padding: 50px;
+            background: #f4f4f4;
+        }
+
+        input {
+            width: 60px;
+            padding: 5px;
+            margin: 5px;
+            text-align: center;
+        }
+
+        button {
+            padding: 10px 15px;
+            cursor: pointer;
+            margin: 3px;
+        }
+
+        .result {
+            font-size: 48px;
+            margin: 20px 0;
+        }
+
+  
+    </style>
+</head>
+<body>
+
+    <h1>عداد تنازلي</h1>
+    <input type="number" id="minutes" placeholder="دقائق" min="0">
+    <input type="number" id="seconds" placeholder="ثواني" min="0" max="59">
+    <button id="startButton"> ابدأ</button>
+    <button id="resetButton"> إعادة تعيين</button>
+    <div class="result" id="result">00:00</div>
+
+    <script>
+        let timerInterval;
+        let totalTime = 0;
+        let isRunning = false;
+        let initialTime = 0;
+
+        document.getElementById('startButton').onclick = toggleTimer;
+        document.getElementById('resetButton').onclick = resetTimer;
+
+        function toggleTimer() {
+            if (!isRunning) {
+                totalTime = getInputTime();
+                if (totalTime <= 0 || isNaN(totalTime)) {
+                    alert(' الرجاء إدخال وقت صحيح!');
+                    return;
+                }
+                initialTime = totalTime;
+                startTimer();
+            } else {
+                pauseTimer();
+            }
+        }
+
+        function startTimer() {
+            isRunning = true;
+            document.getElementById('startButton').textContent = ' إيقاف';
+
+            timerInterval = setInterval(() => {
+                if (totalTime <= 0) {
+                    finishTimer();
+        } else {
+                    totalTime--;
+        updateDisplay();
+        }
+        }, 1000);
+        }
+
+        function pauseTimer() {
+            isRunning = false;
+            document.getElementById('startButton').textContent = ' استئناف';
+            clearInterval(timerInterval);
+        }
+
+        function resetTimer() {
+            clearInterval(timerInterval);
+            totalTime = 0;
+            isRunning = false;
+            document.getElementById('minutes').value = '';
+            document.getElementById('seconds').value = '';
+            document.getElementById('result').textContent = '00:00';
+            document.getElementById('result').style.animation = '';
+            document.getElementById('startButton').textContent = ' ابدأ';
+        }
+
+        function finishTimer() {
+            clearInterval(timerInterval);
+            isRunning = false;
+            const beep = new Audio('beep.mp3'); 
+            beep.play();
+            document.getElementById('startButton').textContent = ' ابدأ';
+            document.getElementById('result').style.animation = 'pulse 1s infinite';
+            setTimeout(() => alert(' الوقت انتهى!'), 500);
+        }
+
+        function getInputTime() {
+            const minutes = Math.max(0, parseInt(document.getElementById('minutes').value) || 0);
+            const seconds = Math.max(0, parseInt(document.getElementById('seconds').value) || 0);
+            return minutes * 60 + Math.min(59, seconds);
+        }
+
+        function updateDisplay() {
+            const minutes = String(Math.floor(totalTime / 60)).padStart(2, '0');
+            const seconds = String(totalTime % 60).padStart(2, '0');
+            document.getElementById('result').textContent = `${minutes}:${seconds}`;
+
+            if (totalTime <= 10) {
+                document.getElementById('result').style.animation = 'pulse 1s infinite';
+            } else {
+                document.getElementById('result').style.animation = '';
+            }
+        }
+    </script>
+
+</body>
+</html>

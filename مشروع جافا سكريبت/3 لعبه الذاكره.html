@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <title>لعبة الذاكرة</title>
+    <style>
+        body { font-family: Arial; text-align: center; background: #f4f4f4; }
+        .grid { display: grid; grid-template-columns: repeat(4, 100px); gap: 10px; margin: 20px auto; }
+        .card { width: 100px; height: 100px; background: #333; color: #fff; display: flex; align-items: center; justify-content: center; font-size: 24px; cursor: pointer; }
+        .matched { background: #4CAF50; }
+    </style>
+</head>
+<body>
+    <h1>لعبة الذاكرة</h1>
+    <div class="grid" id="grid"></div>
+
+    <script>
+        const symbols = ['🍎', '🍌', '🍇', '🍊', '🍉', '🍍', '🍓', '🍒'];
+        let cards = [...symbols, ...symbols].sort(() => 0.5 - Math.random());
+        let firstCard, secondCard, lockBoard = false;
+
+        const grid = document.getElementById('grid');
+
+        cards.forEach(symbol => {
+            const card = document.createElement('div');
+            card.classList.add('card');
+            // dataset.symbol خزن البطاقه بداخل
+            card.dataset.symbol = symbol;
+            card.onclick = flipCard;
+            grid.appendChild(card);
+        });
+
+        function flipCard() {
+            if (lockBoard || this === firstCard) return;
+            this.textContent = this.dataset.symbol;
+            this.classList.add('flipped');
+
+            if (!firstCard) {
+                firstCard = this;
+                return;
+            }
+
+            secondCard = this;
+            lockBoard = true;
+
+            checkForMatch();
+        }
+
+        function checkForMatch() {
+            const isMatch = firstCard.dataset.symbol === secondCard.dataset.symbol;
+            isMatch ? disableCards() : unflipCards();
+        }
+
+        function disableCards() {
+            firstCard.classList.add('matched');
+            secondCard.classList.add('matched');
+            resetBoard();
+        }
+
+        function unflipCards() {
+            setTimeout(() => {
+                firstCard.textContent = '';
+                secondCard.textContent = '';
+                resetBoard();
+            }, 1000);
+        }
+
+        function resetBoard() {
+            [firstCard, secondCard, lockBoard] = [null, null, false];
+        }
+    </script>
+</body>
+</html>

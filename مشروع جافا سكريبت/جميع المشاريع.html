@@ -1,0 +1,737 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>مشاريع المهندس انس</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Poppins:wght@300;400;500&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
+    <style>
+        /* Base styles */
+        :root {
+            /* Color Palette - Light Mode */
+            --bg-light-start: #ffffff; /* Pure White */
+            --bg-light-end: #f1f3f5;   /* Very Light Grey */
+            --text-light: #212529;     /* Dark Grey */
+            --primary-light: #0d6efd; /* Bootstrap Blue */
+            --secondary-light: #adb5bd; /* Lighter Grey for borders */
+            --accent-light: #b8860b;   /* Darker Gold for more contrast */
+            --header-bg-light: rgba(255, 255, 255, 0.85); /* Slightly less transparent */
+            --shadow-light: rgba(0, 0, 0, 0.08); /* Softer shadow */
+
+            /* Color Palette - Dark Mode */
+            --bg-dark-start: #161b22; /* GitHub Dark Grey */
+            --bg-dark-end: #0d1117;   /* Darker GitHub Grey */
+            --text-dark: #c9d1d9;     /* GitHub Dark Text */
+            --primary-dark: #58a6ff; /* Lighter Blue */
+            --secondary-dark: #484f58; /* Darker Grey for borders */
+            --accent-dark: #d4af37;   /* Standard Gold */
+            --header-bg-dark: rgba(13, 17, 23, 0.85); /* Darker, less transparent */
+            --shadow-dark: rgba(255, 255, 255, 0.05); /* Very subtle light shadow */
+        }
+
+        body {
+            margin: 0;
+            font-family: 'Poppins', sans-serif;
+            /* Subtle gradient background */
+            background: linear-gradient(180deg, var(--bg-light-start), var(--bg-light-end));
+            color: var(--text-light);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+            min-height: 100vh;
+            padding-bottom: 80px;
+            box-sizing: border-box;
+            overflow-x: hidden;
+            position: relative;
+            transition: background 0.4s ease, color 0.4s ease;
+        }
+
+        /* Dark Mode Styles */
+        body.dark-mode {
+            background: linear-gradient(180deg, var(--bg-dark-start), var(--bg-dark-end));
+            color: var(--text-dark);
+        }
+
+        /* Header Styles */
+        header {
+            text-align: center;
+            padding: 30px 0; /* More vertical padding */
+            width: 100%;
+            margin-top: 0;
+            margin-bottom: 50px; /* Increased space */
+            background-color: var(--header-bg-light);
+            border-bottom: 1px solid var(--secondary-light); /* Adjusted border color */
+            box-shadow: 0 3px 6px var(--shadow-light); /* Refined shadow */
+            backdrop-filter: blur(8px); /* Slightly stronger blur */
+            transition: background-color 0.4s ease, border-color 0.4s ease;
+            position: sticky; /* Make header sticky */
+            top: 0;
+            z-index: 100; /* Ensure header is above content */
+        }
+
+        header.dark-mode {
+            background-color: var(--header-bg-dark);
+            border-bottom-color: var(--secondary-dark);
+            box-shadow: 0 3px 6px var(--shadow-dark);
+        }
+
+        header h1 {
+            margin: 0;
+            font-family: 'Playfair Display', serif;
+            font-size: 40px; /* Slightly larger */
+            font-weight: 700;
+            color: var(--text-light);
+            letter-spacing: 1.5px; /* Slightly more spacing */
+            transition: color 0.4s ease;
+        }
+
+        header.dark-mode h1 {
+            color: var(--text-dark);
+        }
+
+        /* Button Grid Styles */
+        .button-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); /* Slightly wider min */
+            gap: 25px; /* Increased gap */
+            padding: 20px;
+            max-width: 1300px; /* Wider max-width */
+            width: 95%;
+            margin: 0 auto;
+        }
+
+        /* Button Styles - Refined Elegant Look */
+        .button-grid a {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100px; /* Increased height */
+            background-color: var(--header-bg-light); /* Use header bg for consistency */
+            border: 1px solid var(--secondary-light);
+            border-radius: 10px; /* Slightly more rounded */
+            font-size: 16px;
+            font-weight: 400;
+            color: var(--text-light);
+            cursor: pointer;
+            /* Enhanced transition */
+            transition: transform 0.25s ease, background-color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+            box-shadow: 0 2px 5px var(--shadow-light); /* Refined shadow */
+            text-decoration: none;
+            text-align: center;
+            padding: 20px 10px; /* More padding */
+            position: relative;
+            overflow: hidden;
+        }
+
+        .button-grid a i {
+            font-size: 24px; /* Larger icon */
+            margin-bottom: 12px; /* More space */
+            color: var(--accent-light); /* Use accent color by default */
+            transition: color 0.3s ease, transform 0.3s ease;
+        }
+
+        /* Button Hover Effects - More pronounced */
+        .button-grid a:hover {
+            transform: translateY(-5px); /* Lift more */
+            border-color: var(--accent-light); /* Gold border */
+            border-width: 1px; /* Ensure border width stays consistent */
+            box-shadow: 0 6px 12px var(--shadow-light); /* Stronger shadow */
+            background-color: #fff; /* White background */
+        }
+
+        .button-grid a:hover i {
+            color: var(--primary-light); /* Change icon color to primary on hover */
+            transform: scale(1.1); /* Slightly scale icon */
+        }
+
+        /* Dark Mode Button Adjustments */
+        body.dark-mode .button-grid a {
+            background-color: var(--header-bg-dark);
+            border-color: var(--secondary-dark);
+            color: var(--text-dark);
+            box-shadow: 0 2px 5px var(--shadow-dark);
+        }
+
+        body.dark-mode .button-grid a i {
+             color: var(--accent-dark); /* Dark mode accent */
+        }
+
+        body.dark-mode .button-grid a:hover {
+            border-color: var(--accent-dark);
+            background-color: #1c2128; /* Slightly lighter dark */
+            box-shadow: 0 6px 12px var(--shadow-dark);
+        }
+
+         body.dark-mode .button-grid a:hover i {
+             color: var(--primary-dark); /* Dark mode primary */
+         }
+
+        /* Light/Dark Mode Toggle Switch - Consistent */
+        .toggle-switch {
+            position: absolute;
+            top: 35px; /* Adjusted for header padding */
+            right: 30px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            background-color: transparent;
+            padding: 0;
+            border-radius: 0;
+            z-index: 110; /* Above sticky header */
+        }
+
+        .toggle-switch input { display: none; }
+
+        .toggle-slider {
+            position: relative;
+            width: 44px;
+            height: 22px;
+            background-color: var(--secondary-light);
+            border-radius: 22px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            border: none;
+        }
+        body.dark-mode .toggle-slider {
+             background-color: var(--secondary-dark);
+        }
+
+        .toggle-slider:before {
+            content: '';
+            position: absolute;
+            width: 18px;
+            height: 18px;
+            border-radius: 50%;
+            background-color: #fff;
+            top: 2px;
+            left: 2px;
+            transition: transform 0.3s ease;
+            box-shadow: 0 1px 2px rgba(0,0,0,0.2);
+        }
+        body.dark-mode .toggle-slider:before {
+             background-color: #161b22; /* Match dark background */
+        }
+
+        input:checked + .toggle-slider {
+            background-color: var(--primary-dark);
+        }
+        body.dark-mode input:checked + .toggle-slider {
+             background-color: var(--primary-light); /* Use light primary when checked in dark mode */
+        }
+
+        input:checked + .toggle-slider:before {
+            transform: translateX(22px);
+        }
+
+        .toggle-icon {
+            font-size: 18px;
+            color: var(--secondary-light);
+            transition: color 0.3s ease;
+        }
+        body.dark-mode .toggle-icon {
+            color: var(--secondary-dark);
+        }
+        body:not(.dark-mode) .toggle-icon:last-child { display: none; }
+        body.dark-mode .toggle-icon:first-child { display: none; }
+
+        /* WhatsApp Button - Consistent */
+        .whatsapp-button {
+            position: fixed;
+            bottom: 25px;
+            right: 25px;
+            background-color: #128C7E;
+            color: white;
+            border-radius: 50%;
+            width: 55px;
+            height: 55px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 28px;
+            text-decoration: none;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            z-index: 1000;
+            transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
+            border: none;
+        }
+
+        .whatsapp-button:hover {
+            background-color: #075E54;
+            transform: scale(1.08);
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Modal Styles - Consistent */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1001;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0, 0, 0, 0.6); /* Darker overlay for better focus */
+            justify-content: center;
+            align-items: center;
+            backdrop-filter: blur(5px); /* Increased blur */
+        }
+
+        .modal-content {
+            background-color: var(--bg-light-start); /* Use lightest bg */
+            color: var(--text-light);
+            padding: 40px; /* More padding */
+            border-radius: 12px; /* Match buttons */
+            border: none;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15); /* Softer, larger shadow */
+            text-align: center;
+            max-width: 550px; /* Slightly wider */
+            width: 90%;
+            position: relative;
+            animation: fadeInScale 0.4s ease-out; /* Fade and scale */
+            font-family: 'Poppins', sans-serif;
+        }
+         body.dark-mode .modal-content {
+             background-color: var(--bg-dark-start); /* Use lightest dark */
+             color: var(--text-dark);
+             box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+         }
+
+        @keyframes fadeInScale {
+            from { opacity: 0; transform: translateY(-10px) scale(0.98); }
+            to { opacity: 1; transform: translateY(0) scale(1); }
+        }
+
+        .modal-content h2 {
+            margin-bottom: 20px; /* More space */
+            font-family: 'Playfair Display', serif;
+            font-size: 30px; /* Larger */
+            color: var(--primary-light);
+            letter-spacing: 0.5px;
+        }
+         body.dark-mode .modal-content h2 {
+             color: var(--primary-dark);
+         }
+
+        .modal-content p {
+            margin-bottom: 30px; /* More space */
+            font-size: 17px; /* Slightly larger */
+            line-height: 1.7; /* More line spacing */
+            font-weight: 300;
+        }
+
+        .modal-content .close-button {
+            position: absolute;
+            top: 18px;
+            right: 18px;
+            font-size: 26px;
+            cursor: pointer;
+            color: var(--secondary-light);
+            background-color: transparent;
+            border-radius: 0;
+            width: auto;
+            height: auto;
+            line-height: 1;
+            border: none;
+            transition: color 0.2s ease, transform 0.2s ease;
+        }
+         body.dark-mode .modal-content .close-button {
+             color: var(--secondary-dark);
+         }
+
+        .modal-content .close-button:hover {
+            color: var(--text-light);
+            transform: scale(1.15) rotate(90deg); /* Rotate on hover */
+        }
+         body.dark-mode .modal-content .close-button:hover {
+             color: var(--text-dark);
+         }
+
+        .modal-content button {
+            background-color: var(--primary-light);
+            color: white;
+            padding: 14px 30px; /* Larger button */
+            border: none;
+            border-radius: 8px; /* Match button radius */
+            cursor: pointer;
+            font-size: 17px; /* Larger text */
+            font-family: 'Poppins', sans-serif;
+            font-weight: 500;
+            transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
+            box-shadow: 0 3px 6px rgba(0, 0, 0, 0.2);
+            letter-spacing: 0.5px;
+        }
+         body.dark-mode .modal-content button {
+             background-color: var(--primary-dark);
+             box-shadow: 0 3px 6px rgba(0, 0, 0, 0.4);
+         }
+
+        .modal-content button:hover {
+            background-color: #0a58ca; /* Darker primary */
+            transform: translateY(-3px);
+            box-shadow: 0 5px 10px rgba(0, 0, 0, 0.25);
+        }
+         body.dark-mode .modal-content button:hover {
+             background-color: #4a9ae1;
+             box-shadow: 0 5px 10px rgba(0, 0, 0, 0.5);
+         }
+
+        /* Specific Promo Styles - Consistent */
+        .iherb-promo {
+             background-color: var(--bg-light-end); /* Use subtle bg */
+             border: 1px solid var(--secondary-light);
+             /* background-image handled inline */
+        }
+         body.dark-mode .iherb-promo {
+             background-color: var(--bg-dark-end);
+             border-color: var(--secondary-dark);
+         }
+
+         .iherb-promo h2 {
+             color: var(--text-light); /* Match text color */
+         }
+         body.dark-mode .iherb-promo h2 {
+             color: var(--text-dark);
+         }
+
+        .iherb-promo .discount-code {
+            font-size: 20px;
+            font-weight: 500;
+            color: var(--accent-light);
+            background: rgba(0, 0, 0, 0.03); /* Very subtle background */
+            padding: 8px 18px; /* More padding */
+            border-radius: 8px;
+            display: inline-block;
+            margin-top: 10px;
+            border: 1px dashed var(--accent-light); /* Dashed border */
+            font-family: 'Poppins', sans-serif;
+        }
+         body.dark-mode .iherb-promo .discount-code {
+             color: var(--accent-dark);
+             background: rgba(255, 255, 255, 0.05);
+             border-color: var(--accent-dark);
+         }
+
+        /* Code Modal Styles */
+        .code-modal {
+            display: none;
+            position: fixed;
+            z-index: 1002;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.8);
+            overflow: auto;
+        }
+        
+        .code-content {
+            background-color: var(--bg-light-start);
+            margin: 5% auto;
+            padding: 20px;
+            border: 1px solid var(--secondary-light);
+            width: 80%;
+            max-width: 900px;
+            border-radius: 8px;
+            position: relative;
+            color: var(--text-light);
+        }
+        
+        .dark-mode .code-content {
+            background-color: var(--bg-dark-start);
+            border-color: var(--secondary-dark);
+            color: var(--text-dark);
+        }
+        
+        .close-code {
+            position: absolute;
+            right: 15px;
+            top: 10px;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+            color: var(--secondary-light);
+        }
+        
+        .dark-mode .close-code {
+            color: var(--secondary-dark);
+        }
+        
+        pre {
+            background-color: var(--bg-light-end);
+            padding: 15px;
+            border-radius: 5px;
+            overflow-x: auto;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+            font-family: monospace;
+        }
+        
+        .dark-mode pre {
+            background-color: var(--bg-dark-end);
+        }
+        
+        .copy-btn {
+            background-color: var(--primary-light);
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 4px;
+            cursor: pointer;
+            margin-top: 10px;
+            float: right;
+        }
+        
+        .dark-mode .copy-btn {
+            background-color: var(--primary-dark);
+        }
+        
+        .copy-btn:hover {
+            background-color: #0b5ed7;
+        }
+        
+        .dark-mode .copy-btn:hover {
+            background-color: #4a9ae1;
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 992px) { /* Adjusted breakpoint */
+             .button-grid {
+                grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+                gap: 20px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            header h1 {
+                font-size: 32px; /* Adjusted size */
+            }
+            .button-grid {
+                grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+            }
+            .button-grid a {
+                font-size: 15px;
+                min-height: 90px;
+            }
+             .button-grid a i {
+                font-size: 22px;
+            }
+            .modal-content h2 {
+                font-size: 26px;
+            }
+             .modal-content p {
+                font-size: 16px;
+            }
+             .modal-content button {
+                 font-size: 16px;
+                 padding: 12px 25px;
+             }
+             .toggle-switch {
+                 right: 20px;
+                 top: 38px; /* Adjusted */
+             }
+             .code-content {
+                 width: 90%;
+                 margin: 10% auto;
+             }
+        }
+
+        @media (max-width: 480px) {
+             header {
+                 padding: 25px 0;
+                 margin-bottom: 30px;
+             }
+             header h1 {
+                font-size: 26px; /* Adjusted */
+                letter-spacing: 1px;
+            }
+            .button-grid {
+                grid-template-columns: repeat(2, 1fr); /* Keep two columns */
+                gap: 15px;
+            }
+            .button-grid a {
+                font-size: 14px; /* Smaller font */
+                min-height: 85px; /* Adjust height */
+            }
+             .button-grid a i {
+                font-size: 20px; /* Smaller icon */
+                margin-bottom: 8px;
+            }
+             .toggle-switch {
+                 top: 38px; /* Adjusted */
+                 right: 15px;
+             }
+             .toggle-icon {
+                 font-size: 16px;
+             }
+            .whatsapp-button {
+                width: 50px;
+                height: 50px;
+                font-size: 24px;
+                bottom: 15px;
+                right: 15px;
+            }
+             .modal-content {
+                 padding: 30px 25px; /* Adjust padding */
+             }
+             .modal-content h2 {
+                font-size: 24px;
+            }
+             .modal-content p {
+                font-size: 15px;
+            }
+             .modal-content button {
+                 font-size: 15px;
+                 padding: 10px 20px;
+             }
+             .iherb-promo .discount-code {
+                 font-size: 18px;
+                 padding: 6px 15px;
+             }
+             .code-content {
+                 width: 95%;
+                 padding: 15px;
+             }
+             pre {
+                 font-size: 12px;
+             }
+        }
+        .modal {
+    display: none; /* افتراضي غير مرئي */
+    opacity: 0; /* الشفافية الابتدائية */
+    transition: opacity 0.5s ease, transform 0.5s ease; /* تأثيرات الانتقال */
+}
+
+.modal.show {
+    display: flex; /* جعلها مرئية */
+    opacity: 1; /* الشفافية النهائية */
+    transform: scale(1.05); /* تكبير طفيف عند الظهور */
+}
+
+.modal.hide {
+    opacity: 0; /* الشفافية عند الإخفاء */
+    transform: scale(0.95); /* تصغير طفيف عند الإخفاء */
+}
+
+    </style>
+</head>
+<body>
+    <header data-aos="fade-down" data-aos-duration="600">
+        <h1>مشاريع المهندس انس</h1>
+    </header>
+
+    <main>
+        <div class="button-grid">
+            <a href="1  الاقتباسات العشوائية.html" data-aos="fade-up" data-aos-delay="50"><i class="fas fa-quote-right"></i> الاقتباسات العشوائية 1</a>
+            <a href="2 مغير الالوان.html" data-aos="fade-up" data-aos-delay="75"><i class="fas fa-tint"></i> مغير الالوان 2</a>
+            <a href="3 لعبه الذاكره.html" data-aos="fade-up" data-aos-delay="100"><i class="fas fa-brain"></i> لعبه الذاكرة 3</a>
+            <a href="4 عداد الأحرف مع الحدود.html" data-aos="fade-up" data-aos-delay="125"><i class="fas fa-text-width"></i> عداد الأحرف مع الحدود 4</a>
+            <a href="5 ساعه ايقاف.html" data-aos="fade-up" data-aos-delay="150"><i class="fas fa-stopwatch"></i>  ساعه ايقاف 5</a>
+            <a href="6 اله حاسبه بسيطه.html" data-aos="fade-up" data-aos-delay="175"><i class="fas fa-calculator"></i> اله حاسبه بسيطة 6</a>
+            <a href="7 حاسبه بقشيش.html" data-aos="fade-up" data-aos-delay="200"><i class="fas fa-money-bill-wave"></i> حاسبه بقشيش 7</a>
+            <a href="8 عارض الصور.html" data-aos="fade-up" data-aos-delay="225"><i class="fas fa-images"></i> عارض الصور 8</a>
+            <a href="9 لعبه حجره ورقه مقص.html" data-aos="fade-up" data-aos-delay="250"><i class="fas fa-hand-rock"></i> لعبه حجره ورقه مقص 9</a>
+            <a href="10 محول درجة الحرارة.html" data-aos="fade-up" data-aos-delay="275"><i class="fas fa-thermometer-half"></i> محول درجة الحرارة 10</a>
+            <a href="11 مؤقت بومودورو.html" data-aos="fade-up" data-aos-delay="300"><i class="fas fa-clock"></i> مؤقت بومودورو 11</a>
+            <a href="12  تطبيق اختبار.html" data-aos="fade-up" data-aos-delay="325"><i class="fas fa-question-circle"></i> تطبيق اختبار 12</a>
+            <a href="13 رمي النرد.html" data-aos="fade-up" data-aos-delay="350"><i class="fas fa-dice"></i> رمي النرد 13</a>
+            <a href="14 متتبع النفقات.html" data-aos="fade-up" data-aos-delay="375"><i class="fas fa-wallet"></i> متتبع النفقات 14</a>
+            <a href="15 مدقق التناظر.html" data-aos="fade-up" data-aos-delay="400"><i class="fas fa-balance-scale"></i> مدقق التناظر 15</a>
+            <a href="16 اختراع كلمة مرور عشوائية.html" data-aos="fade-up" data-aos-delay="425"><i class="fas fa-key"></i> اختراع كلمة مرور عشوائية 16</a>
+            <a href="17 حاسبة مؤشر كتلة الجسم.html" data-aos="fade-up" data-aos-delay="450"><i class="fas fa-weight"></i> حاسبة مؤشر كتلة الجسم 17</a>
+            <a href="18 قائمه المهام.html" data-aos="fade-up" data-aos-delay="475"><i class="fas fa-tasks"></i> قائمه المهام 18</a>
+            <a href="19 نموذج التخزين المحلي.html" data-aos="fade-up" data-aos-delay="500"><i class="fas fa-database"></i> نموذج التخزين المحلي 19</a>
+            <a href="20 ملاحظات.html" data-aos="fade-up" data-aos-delay="525"><i class="fas fa-sticky-note"></i> ملاحظات 20</a>
+            <a href="21  ساعه رقميه.html" data-aos="fade-up" data-aos-delay="550"><i class="fas fa-clock"></i>  ساعه رقمية 21</a>
+            <a href="22 محول العملات.html" data-aos="fade-up" data-aos-delay="575"><i class="fas fa-money-bill-alt"></i> محول العملات 22</a>
+            <a href="تطبيق رسم 23.html" data-aos="fade-up" data-aos-delay="600"><i class="fas fa-paint-brush"></i> تطبيق رسم 23</a>
+            <a href="24 تحويل النص إلى صوت.html" data-aos="fade-up" data-aos-delay="625"><i class="fas fa-volume-up"></i>  تحويل النص إلى صوت 24</a>
+            <a href="25  داة تحميل الصور العشوائية للخلفية.html" data-aos="fade-up" data-aos-delay="650"><i class="fas fa-image"></i>  داة تحميل الصور العشوائية للخلفية 25</a>
+            <a href="26  مولد كلمة مرور عشوائية.html" data-aos="fade-up" data-aos-delay="675"><i class="fas fa-lock"></i> مولد كلمة مرور عشوائية 26</a>
+            <a href="27 ساعه رقميه.html" data-aos="fade-up" data-aos-delay="700"><i class="fas fa-digital-tachograph"></i> ساعة رقميه 27</a>
+            <a href="28 عداد تنازلي.html" data-aos="fade-up" data-aos-delay="725"><i class="fas fa-hourglass-end"></i> عداد تنازلي 28</a>
+            <a href="صور متحركه 29.html" data-aos="fade-up" data-aos-delay="750"><i class="fas fa-film"></i>صور متحركه 29</a>
+            <a href="الطقس 30.html" data-aos="fade-up" data-aos-delay="775"><i class="fas fa-cloud-sun"></i> الطقس 30</a>
+        </div>
+    </main>
+
+    <a href="https://wa.me/1234567890" class="whatsapp-button" target="_blank" rel="noopener noreferrer" title="Contact us on WhatsApp">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+
+    <!-- Code Modal -->
+    <div id="codeModal" class="code-modal">
+        <div class="code-content">
+            <span class="close-code">&times;</span>
+            <h2 id="codeTitle">كود المشروع</h2>
+            <pre id="codeContent">سيظهر هنا كود المشروع عند النقر على زر "عرض الكود" داخل كل مشروع</pre>
+            <button class="copy-btn" onclick="copyCode()">نسخ الكود</button>
+        </div>
+    </div>
+
+    <!-- Promo Modal -->
+    <div id="promo-modal" class="modal">
+        <div class="modal-content iherb-promo" style="background-image: url('https://placehold.co/550x350/e9ecef/495057?text=Welcome'); background-size: cover; background-position: center;">
+             <span class="close-button" title="Close">&times;</span>
+             <h2>Exclusive Welcome Offer</h2>
+             <p>As a new visitor, enjoy a special 10% discount on your first iHerb order.</p>
+            <p>Use code: <span class="discount-code">WELCOME10</span></p>
+             <button onclick="window.open('https://www.iherb.com/', '_blank')">Shop Now</button>
+        </div>
+    </div>
+
+    <script>
+        // Initialize AOS animations
+        AOS.init({
+            once: true,
+            duration: 500,
+            easing: 'ease-out-quad', 
+            offset: 50,
+        });
+
+        // Function to show code modal
+        function showCode(title, code) {
+            document.getElementById('codeTitle').textContent = title;
+            document.getElementById('codeContent').textContent = code;
+            document.getElementById('codeModal').style.display = 'block';
+        }
+
+        // Function to copy code to clipboard
+        function copyCode() {
+            const codeContent = document.getElementById('codeContent').textContent;
+            navigator.clipboard.writeText(codeContent).then(() => {
+                alert('تم نسخ الكود بنجاح!');
+            });
+        }
+
+        // Close code modal when clicking on X
+        document.querySelector('.close-code').onclick = function() {
+            document.getElementById('codeModal').style.display = 'none';
+        }
+
+        // Close code modal when clicking outside of it
+        window.onclick = function(event) {
+            if (event.target == document.getElementById('codeModal')) {
+                document.getElementById('codeModal').style.display = 'none';
+            }
+        }
+
+        // Function to load and display code from a file
+        function loadAndShowCode(title, fileName) {
+            fetch(fileName)
+                .then(response => response.text())
+                .then(code => {
+                    showCode(title, code);
+                })
+                .catch(error => {
+                    showCode(title, 'حدث خطأ أثناء تحميل الكود: ' + error);
+                });
+        }
+    </script>
+</body>
+</html>

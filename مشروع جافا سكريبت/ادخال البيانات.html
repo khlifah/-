@@ -1,0 +1,112 @@
+﻿<!DOCTYPE html>
+<html lang="ar">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>نموذج تسجيل المعتمر</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f2f2f2;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .container {
+            background-color: #ffffff;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            padding: 30px;
+            width: 90%;
+            max-width: 500px;
+        }
+
+        h2 {
+            text-align: center;
+            color: darkcyan;
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+            color: #333;
+        }
+
+        input[type="text"],
+        input[type="tel"],
+        input[type="date"],
+        input[type="file"] {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            transition: border-color 0.3s;
+        }
+
+        input[type="text"]:focus,
+        input[type="tel"]:focus,
+        input[type="date"]:focus {
+            border-color: darkcyan;
+            outline: none;
+        }
+
+        button {
+            width: 100%;
+            padding: 10px;
+            background-color: darkcyan;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 1.1em;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        button:hover {
+            background-color: #0d4d6c;
+        }
+
+        .footer {
+            text-align: center;
+            margin-top: 20px;
+            color: #777;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h2> تسجيل المعتمر</h2>
+        <form id="registrationForm">
+            <label for="name">الاسم الكامل:</label>
+            <input type="text" id="name" name="name" required>
+
+            <label for="phone">رقم الجوال:</label>
+            <input type="tel" id="phone" name="phone" required pattern="[0-9]{10}" placeholder="أدخل رقم الجوال 10 أرقام">
+
+            <label for="passport">صورة الجواز:</label>
+            <input type="file" id="passport" name="passport" accept="image/*" required>
+
+            <label for="dob">تاريخ الميلاد:</label>
+            <input type="date" id="dob" name="dob" required>
+
+            <label for="passportExpiry">تاريخ انتهاء صلاحية الجواز:</label>
+            <input type="date" id="passportExpiry" name="passportExpiry" required>
+
+            <button type="submit">تسجيل</button>
+        </form>
+        <div class="footer">
+            <p>© 2024 جميع الحقوق محفوظة.</p>
+        </div>
+    </div>
+</body>
+
+</html>

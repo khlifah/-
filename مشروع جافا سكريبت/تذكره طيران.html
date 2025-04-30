@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="ar">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>تذكره طيران</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-size: cover;
+            background-position: center;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            color: white;
+        }
+
+        .container {
+            background-color: rgba(255, 255, 255, 0.9);
+            border-radius: 15px;
+            box-shadow: 0 10px 20px rgba(0.2, 0.2, 0.2, 0.2);
+            padding: 40px;
+            width: 90%;
+            max-width: 500px;
+            transition: transform 0.3s;
+        }
+
+            .container:hover {
+                transform: translateY(-5px);
+            }
+
+        h2 {
+            text-align: center;
+            color: #005f73;
+            margin-bottom: 20px;
+            font-size: 1.8rem;
+            text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+            color: #333;
+        }
+
+        input[type="text"],
+        input[type="tel"],
+        input[type="date"],
+        input[type="file"] {
+            width: 100%;
+            padding: 12px;
+            margin-bottom: 10px;
+            border: 2px solid #005f73;
+            border-radius: 5px;
+            transition: border-color 0.3s, box-shadow 0.3s;
+        }
+
+            input[type="text"]:focus,
+            input[type="tel"]:focus,
+            input[type="date"]:focus {
+                border-color: #007f80;
+                box-shadow: 0 0 5px rgba(0, 127, 128, 0.5);
+                outline: none;
+            }
+
+        .char-counter {
+            font-size: 0.8rem;
+            color: #555;
+            text-align: right;
+            margin-bottom: 20px;
+        }
+
+        button {
+            width: 100%;
+            padding: 12px;
+            background-color: #005f73;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 1.2em;
+            cursor: pointer;
+            transition: background-color 0.3s, transform 0.3s;
+        }
+
+            button:hover {
+                background-color: #007f80;
+                transform: scale(1.05);
+            }
+
+        .footer {
+            text-align: center;
+            margin-top: 20px;
+            color: #777;
+            font-size: 0.9rem;
+        }
+
+        .speech-btn {
+            display: inline-block;
+            margin-left: 10px;
+            padding: 5px 10px;
+            background-color: #007f80;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+            .speech-btn:hover {
+                background-color: #005f73;
+            }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h2>احجز رحلتك</h2>
+        <form id="visitForm">
+            <label for="name">الاسم الكامل:</label>
+            <div>
+                <input type="text" id="name" name="name" maxlength="20" required>
+              
+            </div>
+            
+
+            <label for="phone">رقم الجوال:</label>
+            <div>
+                <input type="tel" id="phone" name="phone" maxlength="10" required pattern="[0-9]{10}" placeholder="أدخل رقم الجوال 9 أرقام">
+           
+            </div>
+           
+
+            <label for="passport">صورة الجواز:</label>
+<input type="file" id="passport" name="passport" accept="image/*" required><br><br>
+
+<label for="destination">مكان الرحلة:</label>
+<select id="destination" name="destination" required>
+  <option value="">اختر وجهة الرحلة</option>
+  <option value="saudi_arabia">المملكة العربية السعودية</option>
+  <option value="egypt">مصر</option>
+  <option value="united_arab_emirates">الإمارات العربية المتحدة</option>
+  <option value="turkey">تركيا</option>
+  <option value="malaysia">ماليزيا</option>
+  <option value="france">فرنسا</option>
+  <option value="italy">إيطاليا</option>
+  </select><br><br>
+
+<label for="passportExpiry">تاريخ انتهاء التذكرة:</label>
+<input type="date" id="passportExpiry" name="passportExpiry" required><br><br>
+
+<button type="submit">تسجيل</button>
+
+<div id="destination_image" style="margin-top: 20px;">
+  </div>
+
+
+        </form>
+        <div class="footer">
+            <p>© 2024 جميع الحقوق محفوظة.</p>
+        </div>
+    </div>
+
+   
+</body>
+
+</html>

@@ -1,0 +1,110 @@
+﻿<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>تطبيق الرسم البسيط</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 20px;
+        }
+        canvas {
+            border: 2px solid black;
+            margin-top: 20px;
+            background-color: #f9f9f9;
+        }
+        .controls {
+            margin-bottom: 20px;
+        }
+        .controls button {
+            padding: 10px 20px;
+            margin: 5px;
+            cursor: pointer;
+        }
+        .controls input[type="color"] {
+            width: 50px;
+            height: 30px;
+            vertical-align: middle;
+        }
+        .controls input[type="range"] {
+            width: 150px;
+            vertical-align: middle;
+        }
+    </style>
+</head>
+<body>
+    <h1>تطبيق الرسم البسيط</h1>
+    <div class="controls">
+        <label for="colorPicker">اختر لون الفرشاة:</label>
+        <input type="color" id="colorPicker" value="#000000">
+        
+        <label for="brushSize">حجم الفرشاة:</label>
+        <input type="range" id="brushSize" min="1" max="50" value="5">
+        
+        <button onclick="clearCanvas()">مسح اللوحة</button>
+    </div>
+    <canvas id="drawingCanvas" width="800" height="600"></canvas>
+
+    <script>
+        const canvas = document.getElementById('drawingCanvas');
+        const ctx = canvas.getContext('2d');
+
+        let isDrawing = false;
+        let brushColor = '#000000';
+        let brushSize = 5;
+
+        // تحديث حجم الفرشاة عند تغيير الـ slider
+        document.getElementById('brushSize').addEventListener('input', (e) => {
+            brushSize = e.target.value;
+        });
+
+        // تحديث لون الفرشاة عند تغيير الـ color picker
+        document.getElementById('colorPicker').addEventListener('input', (e) => {
+            brushColor = e.target.value;  
+            
+        });
+
+        // بدء الرسم عند الضغط على الزر الأيسر للماوس
+        canvas.addEventListener('mousedown', (e) => {
+            isDrawing = true;
+            draw(e);
+        });
+
+        // إيقاف الرسم عند رفع الزر الأيسر للماوس
+        canvas.addEventListener('mouseup', () => {
+            isDrawing = false;
+            ctx.beginPath(); // لإنهاء الخط الحالي
+        });
+
+        // الرسم أثناء تحريك الماوس
+        canvas.addEventListener('mousemove', (e) => {
+            if (isDrawing) {
+                draw(e);
+            }
+        });
+
+        // دالة الرسم
+        function draw(e) {
+            const rect = canvas.getBoundingClientRect();
+            const x = e.clientX - rect.left;
+            const y = e.clientY - rect.top;
+
+            ctx.lineWidth = brushSize;
+            ctx.lineCap = 'round';
+            ctx.strokeStyle = brushColor;
+
+            ctx.lineTo(x, y); // رسم خط إلى النقطة الحالية
+            ctx.stroke(); // تطبيق الرسم
+            ctx.beginPath(); // بدء مسار جديد
+            ctx.moveTo(x, y); // تحريك القلم إلى النقطة الحالية
+        }
+
+        // مسح اللوحة
+        function clearCanvas() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+        }
+    </script>
+</body>
+</html>

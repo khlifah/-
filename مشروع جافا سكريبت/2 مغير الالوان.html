@@ -1,0 +1,35 @@
+﻿<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>تغير الألوان</title>
+    <style>
+        body { 
+            display: flex; 
+            justify-content: center; 
+            align-items: center; 
+            height: 100vh; 
+            transition: background-color 0.5s; 
+        }
+        button {
+            padding: 15px 30px; 
+            font-size: 16px; 
+            border: none; 
+            border-radius: 5px; 
+            cursor: pointer; 
+        }
+    </style>
+</head>
+<body>
+    <button id="changeColor">اضغط لتغيير اللون</button>
+
+    <script>
+        document.getElementById('changeColor').addEventListener('click', function() {
+            //يحول الرقم إلى نظام العد الست عشري
+            const randomColor = '#' + Math.floor(Math.random()*16777215).toString(16);
+            document.body.style.backgroundColor = randomColor;
+        });
+    </script>
+</body>
+</html>

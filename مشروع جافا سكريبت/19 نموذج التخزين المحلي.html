@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>نموذج التخزين المحلي</title>
+    <style>
+        body { font-family: Arial, sans-serif; text-align: center; padding: 50px; background-color: #f4f4f4; }
+        input, textarea { width: 300px; padding: 10px; margin: 10px; }
+        button { padding: 10px 20px; cursor: pointer; }
+    </style>
+</head>
+<body>
+    <h1>نموذج التخزين المحلي</h1>
+    <input type="text" id="nameInput" placeholder="أدخل اسمك...">
+    <textarea id="messageInput" placeholder="اكتب رسالتك..."></textarea>
+    <br>
+    <button id="saveButton">حفظ</button>
+
+    <script>
+        // استرجاع البيانات المحفوظة من التخزين المحلي عند تحميل الصفحة
+        window.onload = function() {
+            const savedName = localStorage.getItem('userName');
+            const savedMessage = localStorage.getItem('userMessage');
+
+            if (savedName) {
+                document.getElementById('nameInput').value = savedName;
+            }
+            if (savedMessage) {
+                document.getElementById('messageInput').value = savedMessage;
+            }
+        };
+
+        // حفظ البيانات في التخزين المحلي عند الضغط على زر "حفظ"
+        document.getElementById('saveButton').addEventListener('click', () => {
+            const name = document.getElementById('nameInput').value;
+            const message = document.getElementById('messageInput').value;
+
+            localStorage.setItem('userName', name);
+            localStorage.setItem('userMessage', message);
+
+            alert('تم حفظ البيانات بنجاح!');
+        });
+    </script>
+</body>
+</html>
