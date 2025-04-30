@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <title>تطبيق الملاحظات</title>
+    <style>
+        body { font-family: Arial; text-align: center; }
+        ul { list-style: none; padding: 0; }
+        li { display: flex; justify-content: space-between; margin: 5px; }
+    </style>
+</head>
+<body>
+    <h1>تطبيق الملاحظات</h1>
+    <input id="noteInput" placeholder="أضف ملاحظة" />
+    <button id="addNote">إضافة</button>
+    <ul id="noteList"></ul>
+
+    <script>
+        const notes = JSON.parse(localStorage.getItem('notes')) || [];
+        const addNote = () => {
+            const note = noteInput.value;
+            if (note) {
+                notes.push(note);
+                localStorage.setItem('notes', JSON.stringify(notes));
+                renderNotes();
+                noteInput.value = '';
+            }
+        };
+        const renderNotes = () => {
+            noteList.innerHTML = '';
+            notes.forEach((note, i) => {
+                const li = document.createElement('li');
+                li.innerHTML = `${note} <button onclick="deleteNote(${i})">حذف</button>`;
+                noteList.appendChild(li);
+            });
+        };
+        const deleteNote = (i) => {
+            notes.splice(i, 1);
+            localStorage.setItem('notes', JSON.stringify(notes));
+            renderNotes();
+        };
+        document.getElementById('addNote').onclick = addNote;
+        renderNotes();
+    </script>
+</body>
+</html>

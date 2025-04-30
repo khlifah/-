@@ -1,0 +1,33 @@
+﻿<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>مولد كلمة مرور عشوائية</title>
+    <style>
+        body { font-family: Arial, sans-serif; text-align: center; padding: 50px; background-color: #f4f4f4; }
+        button { padding: 10px 20px; font-size: 16px; cursor: pointer; }
+        .result { font-size: 24px; margin: 20px 0; }
+    </style>
+</head>
+<body>
+    <h1>مولد كلمة مرور عشوائية</h1>
+    <button id="generateButton">أنشئ كلمة مرور</button>
+    <div class="result" id="result"></div>
+
+    <script>
+        document.getElementById('generateButton').addEventListener('click', () => {
+            const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*()_+[]{}|;:,.<>?';
+            const passwordLength = 12; 
+            let password = '';
+
+            for (let i = 0; i < passwordLength; i++) {
+                const randomIndex = Math.floor(Math.random() * characters.length);
+                password += characters[randomIndex];
+            }
+
+            document.getElementById('result').textContent = `كلمة المرور: ${password}`;
+        });
+    </script>
+</body>
+</html>

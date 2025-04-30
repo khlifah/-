@@ -1,0 +1,68 @@
+﻿<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>تحويل النص إلى كلام</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 50px;
+        }
+        textarea {
+            width: 80%;
+            height: 100px;
+            margin-bottom: 20px;
+        }
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        .error {
+            color: red;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <h1>تطبيق تحويل النص إلى كلام</h1>
+    <textarea id="textInput" placeholder="أدخل النص هنا..."></textarea><br>
+    <button onclick="speakText()">تكلم</button>
+    <p class="error" id="errorMessage"></p>
+
+    <script>
+        function speakText() {
+            // الحصول على النص من حقل الإدخال
+            const text = document.getElementById('textInput').value;
+
+            // التحقق من دعم المتصفح لخاصية speechSynthesis
+            if (!('speechSynthesis' in window)) {
+                document.getElementById('errorMessage').textContent = 'متصفحك لا يدعم خاصية تحويل النص إلى كلام.';
+                return;
+            }
+
+            // إنشاء كائن Utterance
+            const utterance = new SpeechSynthesisUtterance(text);
+
+            // اختيار الصوت (اختياري)
+            const voices = window.speechSynthesis.getVoices();
+            utterance.voice = voices.find(voice => voice.lang === 'en-SA') || voices[0]; // اختيار صوت عربي إذا كان متاحًا
+
+            // ضبط خصائص الكلام (اختياري)
+            utterance.rate = 1; // سرعة الكلام (0.1 إلى 10)
+            utterance.pitch = 1; // نغمة الصوت (0 إلى 2)
+            utterance.volume = 1; // مستوى الصوت (0 إلى 1)
+
+            // تشغيل الكلام
+            window.speechSynthesis.speak(utterance);
+
+            // معالجة الأخطاء
+            utterance.onerror = function (event) {
+                document.getElementById('errorMessage').textContent = 'حدث خطأ أثناء التحدث: ' + event.error;
+            };
+        }
+    </script>
+</body>
+</html>

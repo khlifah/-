@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>مؤقت بومودورو</title>
+    <style>
+        body { font-family: Arial; text-align: center; background: #f4f4f4; padding: 50px; }
+        #timer { font-size: 48px; margin: 20px 0; }
+        button { padding: 10px 20px; font-size: 16px; cursor: pointer; }
+        .hidden { display: none; }
+    </style>
+</head>
+<body>
+    <h1>مؤقت بومودورو</h1>
+    <div id="timer">25:00</div>
+    <button id="start">ابدأ</button>
+    <button id="reset" class="hidden">إعادة تعيين</button>
+
+    <script>
+        let workTime = 1500, isWorking = true, timerInterval;
+        const timerDisplay = document.getElementById('timer');
+
+        function startTimer() {
+            document.getElementById('start').classList.add('hidden');
+            document.getElementById('reset').classList.remove('hidden');
+            timerInterval = setInterval(() => {
+                if (workTime <= 0) {
+                    clearInterval(timerInterval);
+                    alert(isWorking ? "وقت الاستراحة!" : "العودة للعمل!");
+                    workTime = isWorking ? 300 : 1500; // 5 دقائق استراحة
+                    isWorking = !isWorking;
+                } else {
+                    workTime--;
+                }
+                timerDisplay.textContent = `${String(Math.floor(workTime / 60)).padStart(2, '0')}:${String(workTime % 60).padStart(2, '0')}`;
+            }, 1000);
+        }
+
+        function resetTimer() {
+            clearInterval(timerInterval);
+            workTime = 1500; isWorking = true;
+            timerDisplay.textContent = "25:00";
+            document.getElementById('start').classList.remove('hidden');
+            document.getElementById('reset').classList.add('hidden');
+        }
+
+        document.getElementById('start').addEventListener('click', startTimer);
+        document.getElementById('reset').addEventListener('click', resetTimer);
+    </script>
+</body>
+</html>

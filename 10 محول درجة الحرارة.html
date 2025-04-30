@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>محول درجة الحرارة</title>
+    <style>
+        body { font-family: Arial, sans-serif; text-align: center; padding: 50px; background-color: #f4f4f4; }
+        input { padding: 10px; margin: 10px; width: 200px; }
+        button { padding: 10px 20px; cursor: pointer; }
+        .result { margin-top: 20px; font-size: 24px; }
+    </style>
+</head>
+<body>
+    <h1>محول درجة الحرارة</h1>
+    <input type="number" id="temperatureInput" placeholder="أدخل درجة الحرارة...">
+    <select id="unitSelect">
+        <option value="C">مئوي</option>
+        <option value="F">فهرنهايت</option>
+        <option value="K">كلفن</option>
+    </select>
+    <button id="convertButton">تحويل</button>
+
+    <div class="result" id="result"></div>
+
+    <script>
+        document.getElementById('convertButton').addEventListener('click', () => {
+            const temperature = parseFloat(document.getElementById('temperatureInput').value);//temperature: يحصل على القيمة الرقمية المدخلة (يستخدم parseFloat لتحويل النص إلى رقم عشري)
+            const unit = document.getElementById('unitSelect').value;
+            let result = '';
+
+            if (unit === 'C') {
+                const toF = (temperature * 9/5) + 32;
+                const toK = temperature + 273.15;
+                result = `${temperature}°C = ${toF.toFixed(2)}°F = ${toK.toFixed(2)}K`;
+            } else if (unit === 'F') {
+                const toC = (temperature - 32) * 5/9;
+                const toK = toC + 273.15;
+                result = `${temperature}°F = ${toC.toFixed(2)}°C = ${toK.toFixed(2)}K`;
+            } else if (unit === 'K') {
+                const toC = temperature - 273.15;
+                const toF = (toC * 9/5) + 32;
+                result = `${temperature}K = ${toC.toFixed(2)}°C = ${toF.toFixed(2)}°F`;
+            }
+
+            document.getElementById('result').textContent = result;
+        });
+    </script>
+</body>
+</html>

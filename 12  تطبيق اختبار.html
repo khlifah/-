@@ -1,0 +1,57 @@
+﻿<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>تطبيق اختبار</title>
+    <style>
+        body { font-family: Arial;
+                display: flex;
+                 flex-direction: column;
+                  align-items: center;
+                   height: 100vh;
+                    background: #f4f4f4;
+
+        }
+        button { padding: 10px;
+                  margin: 5px;
+
+        }
+    </style>
+</head>
+<body>
+    <h1>اختبار </h1>
+    <div id="quizContainer"></div>
+    <button id="nextButton" style="display: none;">التالي</button>
+    <div id="result"></div>
+
+    <script>
+        const quizData = [
+            { question: "ما هو اهم ركن في الاسلام ؟", options: [ "الزكاه", "الصوم", "الصلاه"], answer: "الصلاه" },
+            { question: "عاصمةالحاليه في اليمن؟", options: ["عدن", "مارب", "صنعاء", "تعز"], answer: "عدن" },
+            { question: "  افضل مهندس درسك'؟", options: ["المهندس ايمن", "المهندس امين", "المهندس انس", ], answer: "المهندس انس" },
+        ];
+
+        let currentQuestionIndex = 0, score = 0;
+
+        function loadQuestion() {
+            const q = quizData[currentQuestionIndex];
+            document.getElementById('quizContainer').innerHTML = `<h2>${q.question}</h2>` +
+                q.options.map(option => `<button onclick="selectOption('${option}')">${option}</button>`).join('');
+        }
+
+        function selectOption(selected) {
+            if (selected === quizData[currentQuestionIndex].answer) score++;
+            document.getElementById('nextButton').style.display = 'block';
+        }
+
+        document.getElementById('nextButton').addEventListener('click', () => {
+            currentQuestionIndex++;
+            if (currentQuestionIndex < quizData.length) loadQuestion();
+            else document.getElementById('result').innerHTML = `انتهت الاسئله! درجتك: ${score}`;
+        });
+
+        loadQuestion();
+    </script>
+</body>
+</html>

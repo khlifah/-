@@ -1,0 +1,55 @@
+﻿<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>عارض الصور</title>
+    <style>
+        body { font-family: Arial; display: flex; flex-direction: column; align-items: center; height: 100vh; background: #f4f4f4; }
+        .slider { position: relative; width: 80%; max-width: 600px; overflow: hidden; }
+        .slides { display: flex; transition: transform 0.5s ease; }
+        .slide { min-width: 100%; }
+        img { width: 100%; }
+        button { margin: 10px; padding: 10px; }
+    </style>
+</head>
+<body>
+    <h1> الصور</h1>
+    <div class="slider">
+        <div class="slides" id="slides">
+            <div class="slide"><img src="1.jpg" alt="صورة 1"></div>
+            <div class="slide"><img src="2.jpg" alt="صورة 2"></div>
+            <div class="slide"><img src="3.jpg" alt="صورة 3"></div>
+        </div>
+    </div>
+    <button onclick="prevSlide()">السابق</button>
+    <button onclick="nextSlide()">التالي</button>
+
+    <script>
+        //currentIndex: يخزن رقم الشريحة الحالية (يبدأ من 0)
+
+//slides: العنصر الذي يحتوي على جميع الشرائح
+
+//totalSlides: عدد الشرائح الكلي
+        let currentIndex = 0;
+        const slides = document.getElementById('slides');
+        const totalSlides = document.querySelectorAll('.slide').length;
+
+        function showSlide(index) {
+            slides.style.transform = `translateX(${-index * 100}%)`;// تحرك الشرائح بنسبة 100% لكل شريحة
+        }
+
+        function nextSlide() {
+            currentIndex = (currentIndex + 1) % totalSlides;
+            showSlide(currentIndex);
+        }
+
+        function prevSlide() {
+            currentIndex = (currentIndex - 1 + totalSlides) % totalSlides;
+            showSlide(currentIndex);
+        }
+
+        setInterval(nextSlide, 100000); 
+    </script>
+</body>
+</html>

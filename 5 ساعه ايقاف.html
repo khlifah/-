@@ -1,0 +1,38 @@
+﻿<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <title>ساعة إيقاف</title>
+    <style>
+        body { font-family: Arial; text-align: center; }
+        #time { font-size: 48px; }
+    </style>
+</head>
+<body>
+    <h1>ساعة إيقاف</h1>
+    <div id="time">00:00:00</div>
+    <button id="start">ابدأ</button>
+    <button id="stop" disabled>إيقاف</button>
+    <button id="reset" disabled>إعادة تعيين</button>
+
+    <script>
+        let s = 0, i;
+        function update() { 
+            const h = Math.floor(s / 3600), m = Math.floor((s % 3600) / 60), sec = s % 60;
+            document.getElementById('time').innerText = `${h}:${m}:${sec}`.replace(/(\d)/g, n => n.padStart(2, '0'));
+        }
+        document.getElementById('start').onclick = () => { 
+            i = setInterval(() => { s++; update(); }, 1000);
+            document.getElementById('start').disabled = true; document.getElementById('stop').disabled = false;
+        };
+        document.getElementById('stop').onclick = () => {
+            clearInterval(i);
+            document.getElementById('start').disabled = false; document.getElementById('reset').disabled = false;
+        };
+        document.getElementById('reset').onclick = () => { 
+            clearInterval(i); s = 0; update();
+            document.getElementById('reset').disabled = true;
+        };
+    </script>
+</body>
+</html>

@@ -1,0 +1,38 @@
+﻿<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>أداة تحميل الصور العشوائية للخلفية</title>
+    <style>
+        body {
+            margin: 0;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: #fff;
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background-size: cover;
+            transition: background-image 0.5s ease-in-out;
+        }
+    </style>
+</head>
+<body>
+    <h1>مرحبا بك!</h1>
+    <p>تغير صورة الخلفية في كل تحميل للصفحة.</p>
+
+    <script>
+        const images = [
+            '1.jpg',
+            '2.jpg',
+            '3.jpg',
+          
+            
+        ];
+        const randomImage = images[Math.floor(Math.random() * images.length)];
+        document.body.style.backgroundImage = `url(${randomImage})`;
+    </script>
+</body>
+</html>

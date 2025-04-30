@@ -1,0 +1,51 @@
+﻿<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>قائمة المهام</title>
+    <style>
+        body { 
+            font-family: Arial;
+             background: #f4f4f4; 
+             padding: 20px; 
+            }
+        input, button { 
+            padding: 10px;
+         }
+        ul { 
+            list-style: none; 
+            padding: 0; 
+        }
+        r { display: flex;
+             justify-content: space-between;
+              padding: 5px;
+               border-bottom: 1px solid #ccc; 
+            }
+        .completed {
+             text-decoration: line-through; 
+             color:gold; 
+            }
+    </style>
+</head>
+<body>
+    <h1>قائمة المهام</h1>
+    <input type="text" id="taskInput" placeholder="اكتب المهمة">
+    <button onclick="addTask()">أضف</button>
+    <ul id="taskList"></ul>
+
+    <script>
+        function addTask() {
+            const input = document.getElementById('taskInput');
+            if (input.value.trim()) {
+                const r = document.createElement('r');
+                r.textContent = input.value;
+                r.onclick = () => r.classList.toggle('completed');
+                r.innerHTML += ' <button onclick="this.parentElement.remove()">حذف</button>';
+                document.getElementById('taskList').appendChild(r);
+                input.value = '';
+            }
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>إنشاء حساب</title>
+    <link rel="stylesheet" href="bootstrap.min.css">
+    <style>
+       body {
+    background-color: #007bff;
+    font-family: Tahoma, sans-serif; 
+}
+
+.card {
+    width: 500px;  
+    margin: 50px auto;  
+    padding: 30px;  
+    border-radius: 10px;  
+    background-color: #ffffff;  
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);  
+}
+
+h2 {
+    color: #007bff; 
+    margin-bottom: 20px;  
+    font-family: Tahoma, sans-serif;  
+}
+
+.welcome {
+    margin-top: 15px;  
+}
+
+.form-control {
+    border-radius: 5px; 
+}
+
+.btn {
+    border-radius: 5px;  
+    padding: 10px;  
+    font-size: 16px; 
+    transition: background-color 0.3s;  
+}
+
+.btn:hover {
+    background-color: #0056b3;  
+    color: #ffffff; 
+}
+
+.text-success {
+    font-weight: bold;  
+}
+
+.age-display {
+    margin-top: 10px; 
+    color: #007bff;  
+}
+
+.password-strength {
+    margin-top: 5px;  
+    font-weight: bold; 
+}
+
+.suggestions {
+    margin-top: 10px; 
+    color: #007bff;  
+    cursor: pointer; 
+}
+
+.suggestions:hover {
+    text-decoration: underline; 
+}
+
+.language-container {
+    text-align: center; 
+    margin-bottom: 20px;  
+}
+
+.social-login button {
+    width: 200px; 
+    margin: 10px;  
+    font-size: 16px; 
+    transition: background-color 0.3s, transform 0.3s;  
+}
+
+.social-login button:hover {
+    transform: translateY(-2px);  
+}
+
+.dynamic-fields {
+    margin: 20px 0;  
+    padding: 15px;  
+    border-radius: 8px; 
+    background-color: #f9f9f9;  
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); 
+}
+
+.dynamic-fields h4 {
+    margin-bottom: 15px; 
+    font-weight: bold;  
+    color: #007bff;  
+}
+
+.dynamic-fields button {
+    width: 100%; 
+    transition: background-color 0.3s; 
+}
+
+.dynamic-fields button:hover {
+    background-color: #d4d8dc; 
+    color: #007ed7;  
+}
+
+.btn {
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    color: white;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.btn-secondary {
+    background-color: #0e76dd; 
+}
+
+.btn-secondary:hover {
+    background-color: #0a5ebd;
+    transform: scale(1.05); 
+}
+
+.btn-secondary:active {
+    background-color: #6f3c08;
+    transform: scale(0.95); 
+}
+.btn-light{
+    color: #0e76dd;
+}
+    </style>
+</head>
+<body>
+
+    <div class="language-container">
+        <label for="language" class="form-label language-label">اختر اللغة</label>
+        <select id="language" class="form-control language-select" onchange="changeLanguage()">
+            <option value="ar">العربية</option>
+            <option value="en">English</option>
+        </select>
+    </div>
+
+    <div class="container">
+        <div class="card">
+            <h2 class="text-info text-center">إنشاء حساب</h2>
+          <!-- حذفنا فقط الأجزاء المطلوبة وحافظنا على تنسيق الصفحة -->
+<!-- باقي العناصر مثل الاسم، تاريخ الميلاد، البريد وكلمة المرور لازالت موجودة -->
+
+<!-- داخل الـ <form> -->
+<form action="" method="post" enctype="multipart/form-data" id="signupForm" class="text-center">
+    <div class="mb-3">
+        <label for="first_name" class="form-label">الاسم الأول</label>
+        <input type="text" name="first_name" id="first_name" class="form-control border border-primary" required>
+    </div>
+    <div class="mb-3">
+        <label for="last_name" class="form-label">اسم العائلة</label>
+        <input type="text" name="last_name" id="last_name" class="form-control border border-primary" required>
+    </div>
+    <div class="mb-3">
+        <label for="birth_date" class="form-label">تاريخ الميلاد</label>
+        <input type="date" name="birth_date" id="birth_date" class="form-control" required max="2005-12-31"> 
+        <p class="age-display d-none" id="ageDisplay">عمرك: <span id="age" class="text-success"></span> سنة</p>
+    </div>
+    <div class="mb-3">
+        <label for="email" class="form-label">البريد الإلكتروني</label>
+        <input type="text" name="email" id="email" class="form-control border border-primary" required>
+        <div class="suggestions" id="emailSuggestions"></div>
+    </div>
+    <p class="welcome text-info d-none" id="welcomeMessage">اهلا وسهلا ومرحبا بك، <span id="welcomeName" class="text-success"></span>!</p>
+   
+    <div class="mb-3">
+        <label for="password" class="form-label">ادخل كلمة السر</label>
+        <input type="password" name="password" id="password" class="form-control" required>
+        <div class="password-strength" id="passwordStrength"></div>
+    </div>
+    <div class="mb-3">
+        <label for="rpassword" class="form-label">تاكيد كلمة السر</label>
+        <input type="password" name="rpassword" id="rpassword" class="form-control" required>
+        <div class="invalid-feedback">
+            كلمة السر غير متطابقة
+        </div>
+        <div class="valid-feedback">
+            كلمة السر متطابقة
+        </div>
+    </div>
+
+    <a href="المقدمة.html" class="btn btn-primary w-100 text-white text-decoration-none">تسجيل الدخول</a>
+
+</form>
+
+        </div>
+    </div>
+    
+    <script src="bootstrap.bundle.min.js"></script>
+    <script>
+    const firstNameInput = document.getElementById('first_name');
+const lastNameInput = document.getElementById('last_name');
+const emailInput = document.getElementById('email');
+const emailSuggestions = document.getElementById('emailSuggestions');
+const welcomeMessage = document.getElementById('welcomeMessage');
+const welcomeName = document.getElementById('welcomeName');
+const ageDisplay = document.getElementById('ageDisplay');
+const ageSpan = document.getElementById('age');
+const birthDateInput = document.getElementById('birth_date');
+const password = document.getElementById('password');
+const rpassword = document.getElementById('rpassword');
+const passwordStrength = document.getElementById('passwordStrength');
+const today = new Date();
+
+
+password.addEventListener('input', () => {
+    const strength = checkPasswordStrength(password.value);
+    passwordStrength.innerHTML = strength.text;
+    passwordStrength.style.color = strength.color;
+});
+
+function checkPasswordStrength(password) {
+    // معايير القوة:
+    const lengthCriteria = password.length >= 8;
+    const numberCriteria = /[0-9]/.test(password);
+    const specialCharCriteria = /[!@#$%^&*]/.test(password);
+    const upperCaseCriteria = /[A-Z]/.test(password);
+
+    let strength = { text: 'ضعيفة', color: 'red' };
+
+    if (lengthCriteria && (numberCriteria || specialCharCriteria) && upperCaseCriteria) {
+        strength = { text: 'قوية', color: 'green' };
+    } else if (lengthCriteria) {
+        strength = { text: 'متوسطة', color: 'yellow' };
+    }
+
+    return strength;
+}
+
+rpassword.addEventListener('input', () => {
+    if (password.value !== rpassword.value) {
+        rpassword.classList.add('is-invalid');
+        rpassword.classList.remove('is-valid');
+    } else {
+        rpassword.classList.remove('is-invalid');
+        rpassword.classList.add('is-valid');
+    }
+});
+
+
+
+
+
+    </script>
+</body>
+</html>

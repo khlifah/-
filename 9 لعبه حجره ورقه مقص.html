@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <title>لعبة حجر-ورق-مقص</title>
+    <style>
+        body { font-family: Arial; text-align: center; background: #f4f4f4; padding: 20px; }
+        button { margin: 10px; padding: 10px; }
+    </style>
+</head>
+<body>
+    <h1>لعبة حجر-ورق-مقص</h1>
+    <button onclick="play('حجر')">حجر</button>
+    <button onclick="play('ورق')">ورق</button>
+    <button onclick="play('مقص')">مقص</button>
+    <h2 id="result"></h2>
+
+    <script>
+        function play(playerChoice) {
+            const choices = ['حجر', 'ورق', 'مقص'];
+            const computerChoice = choices[Math.floor(Math.random() * 3)];
+            let result;
+
+            if (playerChoice === computerChoice) {
+                result = `تعادل! كليكما اخترتما ${playerChoice}.`;
+            } else if (
+                (playerChoice === 'حجر' && computerChoice === 'مقص') ||
+                (playerChoice === 'ورق' && computerChoice === 'حجر') ||
+                (playerChoice === 'مقص' && computerChoice === 'ورق')
+            ) {
+                result = `فزت! ${playerChoice} يهزم ${computerChoice}.`;
+            } else {
+                result = `خسرت! ${computerChoice} يهزم ${playerChoice}.`;
+            }
+
+            document.getElementById('result').innerText = result;
+        }
+    </script>
+</body>
+</html>
